@@ -1,0 +1,52 @@
+.buttonStyle {
+	background-color: #8CE321;
+	color: white;
+}
+
+.containerStyle {
+	padding-top: 12%;
+}
+
+.mainPage {
+	background-color: #121314;
+}
+
+.spotifyIcon{
+	color: #07d159;
+}
+
+.inputSearchContainer {
+	width: 30%;
+	padding-bottom: 5%;
+}
+
+
+.fa-spotify {
+color: #8CE321;
+padding-top: 8%;
+padding-left: 38%;
+}
+
+.spotifyText {
+	font-family: sans-serif;
+	padding-right: 5%;
+	padding-left: 5%;
+}
+
+.fa-heart {
+	color:#d9534f;
+}
+
+.buttonBox {
+	width: 300px;
+	text-align: center;
+}
+
+.top {
+	color:white;
+	font-family: sans-serif;
+	font-size: 25px;
+	padding-bottom: 3%;
+	width: 300px;
+	text-align: center;
+}
