@@ -9,36 +9,23 @@ $("#button").on("click", function(e){
 	if(email === "") {
 		alert("invalid email")
 	}
+	//var jsonP = {}
+	// jsonP [email] = password
+	window.localStorage.setItem(email, password);
 	$("#exampleInputEmail3").val('');
 	$("#exampleInputPassword3").val('');
-	$.ajax({
-		url: "js/spotify.jsonp", 
-		jsonpCallback: "dataUsers",
-		crossDomain: true,
-		type: "GET",
-		dataType: "jsonp",
-		success: logIn,
-		error: error 
-	})
+	// window.open('file:///C:/Users/Alvaro/Documents/PROGRAMA_GENERATION_SEVILLA_2016/EJERCICIOS_SEMANA_10/SPOTIFY/mainPage.html','_self')
 });
-
 var response;
 var logIn = function (data){
 response = data.users
-for (i=0; i<response.length; i++) {
+for (i=0;i<response.length;i++) {
 	var name = response[i].name;
 	var pass = response[i].password;
 	if (email === name && password === pass){
-		var redir = window.location.href;
-		window.location.href = redir.replace("spotifyLogin","mainPage");
-		window.localStorage.setItem ("currentUser", name);	
-		var Obj = {};	
-		if (window.localStorage.getItem(name)){
-			Obj = JSON.parse(window.localStorage.getItem(name));
-		}else {
-			Obj["name"] = name;
-			Obj["password"] = pass;
-		}
+		window.location.href = 'file:///C:/Users/saram_000/Desktop/GENERATION%20SPAIN/PROJECTS/Semana%209(3%20presencial)/Spotify/mainPage.html'
+		window.localStorage.setItem ("currentUser", name);		
+		var Obj = { "name" : name , "password": pass};
 		window.localStorage.setItem (name, JSON.stringify(Obj));
 	}
 }

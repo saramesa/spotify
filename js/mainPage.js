@@ -1,3 +1,6 @@
+//CAMBIOS: A LA FUNCTION REQUEST SE LE HA AÑADIDO UN SEGUNDO PARÁMETRO (LA FUNCIÓN SUCCESS) 
+//PARA QUE SE PUEDA REUTILIZAR LA LLAMADA (LÍNEAS 13 Y 19). TB NUEVA LA LINEA 41 (PUSH DEL NAME)
+
 $("#mainButton").on("click",function(){
 	var input = $("#input").val();
 	var spoty_url = "https://api.spotify.com/v1/search?type=artist&query=SEARCHTERM";   
@@ -28,9 +31,6 @@ var uriArtist = [];
 var f = 0;
 var response;
 var songs = []
-
-prior_login();
-
 var topTracks = function (response2){
 	response=response2
 
@@ -49,6 +49,7 @@ var topTracks = function (response2){
 	$('.btn-success').click (function(){
 	var pair = [nameArtist[this.id], uriArtist[this.id]];
 	songs.push(pair);
+
 	var currentUser = window.localStorage.getItem("currentUser");
 	var obj = JSON.parse(window.localStorage.getItem(currentUser));
 	obj["canciones"] = songs;
@@ -57,35 +58,21 @@ var topTracks = function (response2){
 	})	
 }
 
+//agregar dos div columnares; y en el segundo meter la play list; 
+//los iframes de cada uri; cada vez que el user se logee (cargar el contenido del objeto del user )
 var error = function (){
 	console.log ("ERROR")
 }
 
 function appendPlaylist() {
-	var currentUser = window.localStorage.getItem("currentUser");
-	var obj = JSON.parse(window.localStorage.getItem(currentUser));
 	$('#playlist').empty();
-	var html='<div class="top"><strong>PLAYLIST</strong></div>'
-	for(var j = 0 ; j<obj.canciones.length;j++){
-		html += '<iframe src="https://embed.spotify.com/?uri=' + obj.canciones[j][1] + 
-		'" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>'
-	}
-	$("#playlist").append(html)
-}
-
-function prior_login(){
-	//SACA LA PLAYLIST QUE YA ESTÁ GUARDADA
 	var currentUser = window.localStorage.getItem("currentUser");
-	//INICIA EL ARRAY DE CANCIONES Y URIS CON LA LISTA YA GUARDADA
 	var obj = JSON.parse(window.localStorage.getItem(currentUser));
-	if (obj.canciones){
-		appendPlaylist();
-		var prior_songs = obj["canciones"];
-		var prior_pairs;
-		for(var z = 0 ; z<prior_songs.length;z++){
-			prior_pairs= [prior_songs[z][0], prior_songs[z][1]];
-			songs.push(prior_pairs)
-		}	
-	}
-
+	
+	var html='<div class="top"><strong>PLAYLIST</strong></div>'
+for(var j = 0 ; j<songs.length;j++){
+	html += '<iframe src="https://embed.spotify.com/?uri=' + obj.canciones[j][1] + 
+	'" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>'
+}
+$("#playlist").append(html)
 }
